@@ -5,14 +5,11 @@ pipeline {
         ansiColor('xterm')
     }
 
-    environment {
-        CYPRESS_CACHE_FOLDER = "${WORKSPACE}/cypress_cache"
-    }
-
     stages {
-        stage('Install dependencies') {
+        stage('Install') {
             steps {
                 bat '''
+                    chcp 65001
                     npm install
                     npx cypress install
                 '''
@@ -22,6 +19,7 @@ pipeline {
         stage('Run Cypress') {
             steps {
                 bat '''
+                    chcp 65001
                     npx cypress run --reporter mochawesome --reporter-options reportDir=cypress/reports,overwrite=false,html=true,json=false
                 '''
             }
