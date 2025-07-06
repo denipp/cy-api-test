@@ -2,14 +2,17 @@ pipeline {
     agent any
 
     options {
-        ansiColor('xterm')
+        ansiColor('xterm') 
+    }
+
+    environment {
+        CYPRESS_CACHE_FOLDER = "${WORKSPACE}/cypress_cache"
     }
 
     stages {
-        stage('Install') {
+        stage('Install dependencies') {
             steps {
                 bat '''
-                    chcp 65001
                     npm install
                     npx cypress install
                 '''
