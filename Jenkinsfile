@@ -9,8 +9,8 @@ pipeline {
         stage('Install dependencies') {
             steps {
                 bat '''
-                    call npm install
-                    call npx cypress install
+                    npm install
+                    npx cypress install
                 '''
             }
         }
@@ -18,7 +18,7 @@ pipeline {
         stage('Run Cypress') {
             steps {
                 bat '''
-                    call npx cypress run --reporter mochawesome --reporter-options reportDir=cypress/reports,overwrite=false,html=true,json=false
+                    npx cypress run --reporter mochawesome --reporter-options reportDir=cypress/reports,overwrite=false,html=true,json=false
                 '''
             }
         }
