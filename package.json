@@ -1,0 +1,16 @@
+{
+  "name": "cy-api-test",
+  "version": "1.0.0",
+  "description": "Automation API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Deni",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^14.5.0",
+    "cypress-plugin-api": "^2.11.2",
+    "mochawesome": "^7.1.3"
+  }
+}
