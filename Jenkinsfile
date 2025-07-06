@@ -2,25 +2,23 @@ pipeline {
     agent any
 
     environment {
-        CYPRESS_CACHE_FOLDER = "D:\\testing\\cypress_cache"
+        CYPRESS_CACHE_FOLDER = "${WORKSPACE}/cypress_cache"
     }
 
     stages {
         stage('Install dependencies') {
             steps {
                 bat '''
-                    cd /d D:\\testing\\cy-api-test
-                    npm install
-                    npx cypress install
+                    call npm install
+                    call npx cypress install
                 '''
             }
         }
 
-        stage('Run Cypress tests') {
+        stage('Run Cypress') {
             steps {
                 bat '''
-                    cd /d D:\\testing\\cy-api-test
-                    npx cypress run --reporter mochawesome --reporter-options reportDir=cypress/reports,overwrite=false,html=true,json=false
+                    call npx cypress run --reporter mochawesome --reporter-options reportDir=cypress/reports,overwrite=false,html=true,json=false
                 '''
             }
         }
@@ -31,17 +29,11 @@ pipeline {
                     allowMissing: true,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
-                    reportDir: 'D:\\testing\\cy-api-test\\cypress\\reports',
+                    reportDir: 'cypress/reports',
                     reportFiles: 'mochawesome.html',
-                    reportName: 'Cypress HTML Report'
+                    reportName: 'Cypress Test Report'
                 ])
             }
-        }
-    }
-
-    post {
-        always {
-            echo 'Pipeline selesai.'
         }
     }
 }
