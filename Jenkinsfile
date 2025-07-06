@@ -19,7 +19,6 @@ pipeline {
         stage('Run Cypress') {
             steps {
                 bat '''
-                    chcp 65001
                     npx cypress run --reporter mochawesome --reporter-options reportDir=cypress/reports,overwrite=false,html=true,json=false
                 '''
             }
