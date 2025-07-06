@@ -13,6 +13,7 @@ pipeline {
         stage('Install dependencies') {
             steps {
                 bat '''
+                     chcp 65001 > nul
                     npm install
                     npx cypress install
                 '''
@@ -22,6 +23,7 @@ pipeline {
         stage('Run Cypress') {
             steps {
                 bat '''
+                     chcp 65001 > nul
                     npx cypress run --reporter mochawesome --reporter-options reportDir=cypress/reports,overwrite=false,html=true,json=false
                 '''
             }
